@@ -8,7 +8,7 @@
     tools:context=".fragments.add.AddFragment">
 
     <EditText
-        android:id="@+id/et_title"
+        android:id="@+id/current_et_title"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingStart="24dp"
@@ -21,19 +21,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     <Spinner
-        android:id="@+id/tv_spinner"
+        android:id="@+id/priorities_spinner"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:entries="@array/priorities"
-        app:layout_constraintTop_toBottomOf="@id/et_title"
+        app:layout_constraintTop_toBottomOf="@id/current_et_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
-        android:id="@+id/et_description"
+        android:id="@+id/current_et_description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -45,7 +45,7 @@
         android:hint="@string/description"
         android:gravity="top"
         android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@id/tv_spinner"
+        app:layout_constraintTop_toBottomOf="@id/priorities_spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

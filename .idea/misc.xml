@@ -3,11 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/drawable/custom_input.xml" value="0.11203703703703703" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/drawable/ic_baseline_add.xml" value="0.10555555555555556" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/drawable/ic_baseline_folder_open.xml" value="0.10555555555555556" />
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/drawable/item_background.xml" value="0.19444444444444445" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/layout/activity_main.xml" value="0.21203703703703702" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/layout/fragment_add.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/layout/fragment_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/layout/fragment_update.xml" value="0.22" />
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/layout/row_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/menu/add_fragment_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/menu/list_fragment_menu.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/pablo/AndroidStudioProjects/MyAnotator/app/src/main/res/menu/update_fragment_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
