@@ -7,6 +7,9 @@ import ar.com.myanotator.myanotator.data.models.ToDoData
 class ToDoRepository(private val toDoDao: ToDoDao) {
 
     val getAllData:LiveData<List<ToDoData>> = toDoDao.getAllData()
+    val sortByHighPriority : LiveData<List<ToDoData>> = toDoDao.sortByHighPriority()
+    val sortByLowPriority : LiveData<List<ToDoData>> = toDoDao.sortByLowPriority()
+
 
     suspend fun insertData(toDoData: ToDoData){
         toDoDao.insertData(toDoData)
@@ -22,6 +25,10 @@ class ToDoRepository(private val toDoDao: ToDoDao) {
 
     suspend fun deleteAll() {
         toDoDao.deleteAll()
+    }
+
+     fun searchData(searchQuery: String): LiveData<List<ToDoData>>{
+        return toDoDao.searchDataBase(searchQuery)
     }
 
 }

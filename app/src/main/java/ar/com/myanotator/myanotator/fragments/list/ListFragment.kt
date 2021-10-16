@@ -7,13 +7,16 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ar.com.myanotator.myanotator.R
 import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.FragmentListBinding
@@ -21,14 +24,14 @@ import ar.com.myanotator.myanotator.fragments.list.adapter.ListAdapter
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
 import com.google.android.material.snackbar.Snackbar
-import jp.wasabeef.recyclerview.animators.LandingAnimator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextListener {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by viewModels()
     private val adapter: ListAdapter by lazy { ListAdapter() }
+    private lateinit var binding: FragmentListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         setHasOptionsMenu(true)
     }
 
-    private lateinit var binding: FragmentListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,18 +50,22 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     private fun setupRecyclerView() {
         binding.rvList.adapter = adapter
+        //binding.rvList.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL )
         swipeToDelete(binding.rvList)
         binding.rvList.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 300
         }
+        setAllData()
+        sharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer { showError ->
+            showEmptyDatabaseViews(showError)
+        })
+    }
 
-
+    private fun setAllData() {
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer {
             sharedViewModel.checkIfDatabaseEmpty(it)
             adapter.setData(it)
-        })
-        sharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer { showError ->
-            showEmptyDatabaseViews(showError)
         })
     }
 
@@ -107,11 +113,21 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_fragment_menu, menu)
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete_all) {
-            confirmRemoval()
+        when (item.itemId) {
+            R.id.menu_delete_all -> {confirmRemoval()}
+            R.id.menu_priority_high -> {mToDoViewModel.sortByHighPriority.observe(viewLifecycleOwner, Observer {
+                adapter.setData(it)
+            })}
+            R.id.menu_priority_low -> {mToDoViewModel.sortByLowPriority.observe(viewLifecycleOwner, Observer {
+                adapter.setData(it)
+            })}
         }
         return super.onOptionsItemSelected(item)
     }
@@ -137,8 +153,41 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo"){
             mToDoViewModel.insertData(deletedItem)
-            adapter.notifyItemChanged(position)
+            /*This line its only for the recyclerView animation in linearLayoutManager
+            *
+            *adapter.notifyItemChanged(position)
+            *
+            * */
         }
         snackBar.show()
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (!query.isNullOrEmpty()){
+            searchThroughDatabase(query)
+        }else{
+            setAllData()
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (!query.isNullOrEmpty()){
+            searchThroughDatabase(query)
+        }else{
+            setAllData()
+        }
+        return true
+    }
+
+    private fun searchThroughDatabase(query: String?) {
+        val searchQuery = "%$query%"
+
+        //Doing query and setting the information on adapter
+        mToDoViewModel.searchDataBase(searchQuery).observe(viewLifecycleOwner, Observer {
+            it.let {
+                adapter.setData(it)
+            }
+        })
     }
 }
