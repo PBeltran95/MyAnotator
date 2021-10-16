@@ -21,6 +21,8 @@ import ar.com.myanotator.myanotator.fragments.list.adapter.ListAdapter
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
 import com.google.android.material.snackbar.Snackbar
+import jp.wasabeef.recyclerview.animators.LandingAnimator
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 class ListFragment : Fragment(R.layout.fragment_list) {
 
@@ -46,6 +48,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     private fun setupRecyclerView() {
         binding.rvList.adapter = adapter
+        swipeToDelete(binding.rvList)
+        binding.rvList.itemAnimator = SlideInUpAnimator().apply {
+            addDuration = 300
+        }
+
+
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer {
             sharedViewModel.checkIfDatabaseEmpty(it)
             adapter.setData(it)
@@ -53,7 +61,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         sharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer { showError ->
             showEmptyDatabaseViews(showError)
         })
-        swipeToDelete(binding.rvList)
     }
 
     //Swipe to delete, remember to do the class SwipeToDelete before
