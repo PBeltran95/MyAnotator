@@ -1,15 +1,18 @@
-package ar.com.myanotator.myanotator.fragments.list
+package ar.com.myanotator.myanotator.fragments.list.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ar.com.myanotator.myanotator.R
 import ar.com.myanotator.myanotator.data.models.Priority
 import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.RowLayoutBinding
+import ar.com.myanotator.myanotator.fragments.list.ListFragmentDirections
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -31,6 +34,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
             with(binding) {
                 titleTv.text = note.title
                 descriptionTv.text = note.description
+                rowBackground.setOnClickListener {
+                    val action = ListFragmentDirections.actionListFragmentToUpdateFragment(note)
+                    holder.itemView.findNavController().navigate(action)
+                }
                 when (priority) {
                     Priority.LOW -> {
                         priorityIndicator.setCardBackgroundColor(ContextCompat.getColor(
@@ -49,8 +56,10 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(toDoData: List<ToDoData>){
+        val toDoDiffUtil = DiffUtils(dataList, toDoData)
+        val toDoDiffResult = DiffUtil.calculateDiff(toDoDiffUtil)
         this.dataList = toDoData
-        notifyDataSetChanged()
+        toDoDiffResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemCount(): Int = dataList.size
