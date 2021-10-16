@@ -2,6 +2,7 @@ package ar.com.myanotator.myanotator.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -23,8 +24,10 @@ import ar.com.myanotator.myanotator.fragments.list.adapter.ListAdapter
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
 import ar.com.myanotator.myanotator.utils.hideKeyboard
+import ar.com.myanotator.myanotator.utils.observeOnce
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlin.math.log
 
 class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextListener {
 
@@ -168,6 +171,7 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (!query.isNullOrEmpty()){
             searchThroughDatabase(query)
+            hideKeyboard(requireActivity())
         }else{
             setAllData()
         }
@@ -184,12 +188,14 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
     }
 
     private fun searchThroughDatabase(query: String?) {
+
         val searchQuery = "%$query%"
 
         //Doing query and setting the information on adapter
-        mToDoViewModel.searchDataBase(searchQuery).observe(viewLifecycleOwner, Observer {
+        mToDoViewModel.searchDataBase(searchQuery).observeOnce(viewLifecycleOwner, Observer {
             it.let {
                 adapter.setData(it)
+                Log.d("ListFragment", "SearchThrough database")
             }
         })
     }
