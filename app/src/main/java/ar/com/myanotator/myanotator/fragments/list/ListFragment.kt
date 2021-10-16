@@ -14,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ar.com.myanotator.myanotator.R
@@ -23,6 +22,7 @@ import ar.com.myanotator.myanotator.databinding.FragmentListBinding
 import ar.com.myanotator.myanotator.fragments.list.adapter.ListAdapter
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
+import ar.com.myanotator.myanotator.utils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
@@ -37,6 +37,9 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
         super.onCreate(savedInstanceState)
         //Set Menu
         setHasOptionsMenu(true)
+
+        //Hide soft keyboard
+        hideKeyboard(requireActivity())
     }
 
 
@@ -51,7 +54,7 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
     private fun setupRecyclerView() {
         binding.rvList.adapter = adapter
         //binding.rvList.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL )
+        //binding.rvList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL )
         swipeToDelete(binding.rvList)
         binding.rvList.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 300
@@ -82,7 +85,7 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
                     Toast.LENGTH_SHORT
                 ).show()
                 //Restore Deleted Item
-                restoreDeletedData(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
+                restoreDeletedData(viewHolder.itemView, deletedItem)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
@@ -148,7 +151,7 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
         builder.create().show()
     }
 
-    private fun restoreDeletedData(view: View, deletedItem: ToDoData, position: Int) {
+    private fun restoreDeletedData(view: View, deletedItem: ToDoData) {
         val snackBar = Snackbar.make(view, "Deleted '${deletedItem.title}'",
             Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo"){
