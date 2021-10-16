@@ -2,7 +2,6 @@ package ar.com.myanotator.myanotator.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -16,7 +15,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ar.com.myanotator.myanotator.R
 import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.FragmentListBinding
@@ -26,8 +24,6 @@ import ar.com.myanotator.myanotator.presentation.ToDoViewModel
 import ar.com.myanotator.myanotator.utils.hideKeyboard
 import ar.com.myanotator.myanotator.utils.observeOnce
 import com.google.android.material.snackbar.Snackbar
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlin.math.log
 
 class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextListener {
 
@@ -56,12 +52,7 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
 
     private fun setupRecyclerView() {
         binding.rvList.adapter = adapter
-        //binding.rvList.layoutManager = LinearLayoutManager(requireContext())
-        //binding.rvList.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL )
         swipeToDelete(binding.rvList)
-        binding.rvList.itemAnimator = SlideInUpAnimator().apply {
-            addDuration = 300
-        }
         setAllData()
         sharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer { showError ->
             showEmptyDatabaseViews(showError)
@@ -72,6 +63,8 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer {
             sharedViewModel.checkIfDatabaseEmpty(it)
             adapter.setData(it)
+            //RecyclerViewAnimation, remember to put in the xml the animation as well.
+            binding.rvList.scheduleLayoutAnimation()
         })
     }
 
@@ -195,7 +188,6 @@ class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextLis
         mToDoViewModel.searchDataBase(searchQuery).observeOnce(viewLifecycleOwner, Observer {
             it.let {
                 adapter.setData(it)
-                Log.d("ListFragment", "SearchThrough database")
             }
         })
     }

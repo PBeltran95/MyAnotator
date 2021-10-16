@@ -16,6 +16,7 @@
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:spanCount="2"
         android:orientation="vertical"
+        android:layoutAnimation="@anim/recyclerview_anim"
         tools:listitem="@layout/row_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
