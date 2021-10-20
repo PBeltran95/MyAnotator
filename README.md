@@ -18,5 +18,5 @@ An app in which you can adopt a dog. Take as much dogs as you can in your phone!
 -RecyclerViewAnimations
 -SwipeAnimations
 ##
-<img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (1).png" width="200" height="400"><br><img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (1).png" width="200" height="400">
+<img src="myAnotatorPic (1).png" width="200" height="400"><img src="myAnotatorPic (2).png" width="200" height="400"><img src="myAnotatorPic (3).png" width="200" height="400"><img src="myAnotatorPic (4).png" width="200" height="400"><br><img src="myAnotatorPic (5).png" width="200" height="400"><img src="myAnotatorPic (6).png" width="200" height="400">
 
