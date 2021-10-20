@@ -20,6 +20,11 @@ write more. Enjoy with beautiful animations and more features who are coming!
 -RecyclerViewAnimations
 -SwipeAnimations
 ##
-<img src="myAnotatorPic (1).png" width="250" height="500"><img src="myAnotatorPic (2).png" width="250" height="500"><img src="myAnotatorPic (3).png" width="250" height="500"><br>
-<img src="myAnotatorPic (4).png" width="250" height="500"><img src="myAnotatorPic (5).png" width="250" height="500"><img src="myAnotatorPic (6).png" width="250" height="500">
+<kbd>
+<img src="myAnotatorPic (1).png" width="250" height="500">
+  </kbd><kbd><img src="myAnotatorPic (2).png" width="250" height="500"></kbd><kbd><img src="myAnotatorPic (3).png" width="250" height="500"><</kbd><br>
+  <kbd>
+<img src="myAnotatorPic (4).png" width="250" height="500">
+  </kbd><kbd><img src="myAnotatorPic (5).png" width="250" height="500"></kbd><kbd><img src="myAnotatorPic (6).png" width="250" height="500"><</kbd>
+
 
