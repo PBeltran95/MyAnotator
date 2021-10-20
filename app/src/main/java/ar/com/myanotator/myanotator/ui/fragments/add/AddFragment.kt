@@ -1,19 +1,19 @@
-package ar.com.myanotator.myanotator.fragments.add
+package ar.com.myanotator.myanotator.ui.fragments.add
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ar.com.myanotator.myanotator.R
-import ar.com.myanotator.myanotator.data.models.Priority
 import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.FragmentAddBinding
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddFragment : Fragment(R.layout.fragment_add) {
 
     private val mTodoViewModel: ToDoViewModel by viewModels()

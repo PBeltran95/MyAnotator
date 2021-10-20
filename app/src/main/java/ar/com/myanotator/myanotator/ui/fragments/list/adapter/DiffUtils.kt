@@ -1,4 +1,4 @@
-package ar.com.myanotator.myanotator.fragments.list.adapter
+package ar.com.myanotator.myanotator.ui.fragments.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import ar.com.myanotator.myanotator.data.models.ToDoData

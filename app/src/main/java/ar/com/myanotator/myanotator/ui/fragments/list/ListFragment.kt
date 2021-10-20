@@ -1,4 +1,4 @@
-package ar.com.myanotator.myanotator.fragments.list
+package ar.com.myanotator.myanotator.ui.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -18,13 +18,15 @@ import androidx.recyclerview.widget.RecyclerView
 import ar.com.myanotator.myanotator.R
 import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.FragmentListBinding
-import ar.com.myanotator.myanotator.fragments.list.adapter.ListAdapter
+import ar.com.myanotator.myanotator.ui.fragments.list.adapter.ListAdapter
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
 import ar.com.myanotator.myanotator.utils.hideKeyboard
 import ar.com.myanotator.myanotator.utils.observeOnce
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment : Fragment(R.layout.fragment_list), SearchView.OnQueryTextListener {
 
     private val mToDoViewModel: ToDoViewModel by viewModels()

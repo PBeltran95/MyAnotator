@@ -1,4 +1,4 @@
-package ar.com.myanotator.myanotator.fragments.update
+package ar.com.myanotator.myanotator.ui.fragments.update
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -16,7 +16,9 @@ import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.FragmentUpdateBinding
 import ar.com.myanotator.myanotator.presentation.SharedViewModel
 import ar.com.myanotator.myanotator.presentation.ToDoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UpdateFragment : Fragment(R.layout.fragment_update) {
 
     private val sharedViewModel: SharedViewModel by viewModels()

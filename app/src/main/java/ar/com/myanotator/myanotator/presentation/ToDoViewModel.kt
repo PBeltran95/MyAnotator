@@ -3,30 +3,25 @@ package ar.com.myanotator.myanotator.presentation
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.com.myanotator.myanotator.data.ToDoDatabase
 import ar.com.myanotator.myanotator.data.models.ToDoData
-import ar.com.myanotator.myanotator.data.repository.ToDoRepository
+import ar.com.myanotator.myanotator.repository.ToDoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ToDoViewModel(application: Application):AndroidViewModel(application) {
+@HiltViewModel
+class ToDoViewModel @Inject constructor (private val repository: ToDoRepository): ViewModel() {
 
-    private val toDoDao = ToDoDatabase.getDatabase(application).toDoDao()
-    private val repository:ToDoRepository
 
-    val getAllData:LiveData<List<ToDoData>>
+    val getAllData:LiveData<List<ToDoData>> = repository.getAllData
 
-    val sortByHighPriority:LiveData<List<ToDoData>>
+    val sortByHighPriority:LiveData<List<ToDoData>> = repository.sortByHighPriority
 
-    val sortByLowPriority:LiveData<List<ToDoData>>
-
-    init {
-        repository = ToDoRepository(toDoDao)
-        getAllData = repository.getAllData
-        sortByHighPriority = repository.sortByHighPriority
-        sortByLowPriority = repository.sortByLowPriority
-    }
+    val sortByLowPriority:LiveData<List<ToDoData>> = repository.sortByLowPriority
 
     fun insertData(toDoData: ToDoData){
         viewModelScope.launch (Dispatchers.IO){

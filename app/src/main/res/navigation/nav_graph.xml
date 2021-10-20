@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="ar.com.myanotator.myanotator.fragments.list.ListFragment"
+        android:name="ar.com.myanotator.myanotator.ui.fragments.list.ListFragment"
         android:label="@string/listFragmentTitle"
         tools:layout="@layout/fragment_list">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/addFragment"
-        android:name="ar.com.myanotator.myanotator.fragments.add.AddFragment"
+        android:name="ar.com.myanotator.myanotator.ui.fragments.add.AddFragment"
         android:label="@string/addFragmentTitle"
         tools:layout="@layout/fragment_add">
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="ar.com.myanotator.myanotator.fragments.update.UpdateFragment"
+        android:name="ar.com.myanotator.myanotator.ui.fragments.update.UpdateFragment"
         android:label="@string/updateFragmentTitle"
         tools:layout="@layout/fragment_update">
         <action

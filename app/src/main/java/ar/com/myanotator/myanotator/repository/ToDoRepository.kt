@@ -1,10 +1,11 @@
-package ar.com.myanotator.myanotator.data.repository
+package ar.com.myanotator.myanotator.repository
 
 import androidx.lifecycle.LiveData
 import ar.com.myanotator.myanotator.data.ToDoDao
 import ar.com.myanotator.myanotator.data.models.ToDoData
+import javax.inject.Inject
 
-class ToDoRepository(private val toDoDao: ToDoDao) {
+class ToDoRepository @Inject constructor (private val toDoDao: ToDoDao) {
 
     val getAllData:LiveData<List<ToDoData>> = toDoDao.getAllData()
     val sortByHighPriority : LiveData<List<ToDoData>> = toDoDao.sortByHighPriority()

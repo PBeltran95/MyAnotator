@@ -1,18 +1,20 @@
 package ar.com.myanotator.myanotator.presentation
 
 import android.app.Application
-import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import ar.com.myanotator.myanotator.R
 import ar.com.myanotator.myanotator.data.models.Priority
 import ar.com.myanotator.myanotator.data.models.ToDoData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SharedViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class SharedViewModel @Inject constructor(application: Application) : ViewModel() {
 
     val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)
 

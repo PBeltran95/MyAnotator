@@ -1,4 +1,4 @@
-package ar.com.myanotator.myanotator.fragments.list
+package ar.com.myanotator.myanotator.ui.fragments.list
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

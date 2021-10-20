@@ -1,4 +1,4 @@
-package ar.com.myanotator.myanotator.fragments.list.adapter
+package ar.com.myanotator.myanotator.ui.fragments.list.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import ar.com.myanotator.myanotator.R
 import ar.com.myanotator.myanotator.data.models.Priority
 import ar.com.myanotator.myanotator.data.models.ToDoData
 import ar.com.myanotator.myanotator.databinding.RowLayoutBinding
-import ar.com.myanotator.myanotator.fragments.list.ListFragmentDirections
+import ar.com.myanotator.myanotator.ui.fragments.list.ListFragmentDirections
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 

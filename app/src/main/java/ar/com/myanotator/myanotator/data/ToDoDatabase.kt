@@ -8,33 +8,6 @@ import ar.com.myanotator.myanotator.data.models.ToDoData
 @TypeConverters(Converter::class)
 abstract class ToDoDatabase:RoomDatabase() {
 
-
     abstract fun toDoDao():ToDoDao
-
-
-    /*Creating the db with only one instance
-    * and restricting the access for only one thread
-    * */
-    companion object{
-        @Volatile
-        private var INSTANCE: ToDoDatabase? = null
-
-        fun getDatabase(context: Context): ToDoDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null){
-                return tempInstance
-            }
-            synchronized(this){
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    ToDoDatabase::class.java,
-                    "todo_database"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-
 
 }
