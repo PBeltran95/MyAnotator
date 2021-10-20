@@ -16,9 +16,9 @@ write more. Enjoy with beautiful animations and more features who are coming!
 - Fragments
 - Navigation Component
 - ConstraintLayout, MaterialCardView
--DiffUtils
--RecyclerViewAnimations
--SwipeAnimations
+- DiffUtils
+- RecyclerViewAnimations
+- SwipeAnimations
 ##
 <kbd>
 <img src="myAnotatorPic (1).png" width="250" height="500">
